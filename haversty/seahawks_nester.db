@@ -1,0 +1,33 @@
+-- Création de la table des clients
+CREATE TABLE IF NOT EXISTS clients (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    name VARCHAR(50),
+    location VARCHAR(50)
+);
+
+-- Création de la table des scans
+CREATE TABLE IF NOT EXISTS scans (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    client_id INTEGER,
+    scan_date DATETIME,
+    latency_wan FLOAT,
+    application_version VARCHAR(10),
+    FOREIGN KEY (client_id) REFERENCES clients(id)
+);
+
+-- Création de la table des machines détectées
+CREATE TABLE IF NOT EXISTS machines (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    scan_id INTEGER,
+    ip_address VARCHAR(15),
+    hostname VARCHAR(50),
+    FOREIGN KEY (scan_id) REFERENCES scans(id)
+);
+
+-- Création de la table des ports ouverts
+CREATE TABLE IF NOT EXISTS open_ports (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    machine_id INTEGER,
+    port_number INTEGER,
+    FOREIGN KEY (machine_id) REFERENCES machines(id)
+);

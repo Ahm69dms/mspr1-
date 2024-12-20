@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Détails du Scan</title>
+</head>
+<body>
+    <h1>Détails du Scan</h1>
+    <p><strong>Scan ID :</strong> {{ scan['id'] }}</p>
+    <p><strong>Date du scan :</strong> {{ scan['scan_date'] }}</p>
+    <p><strong>Latence WAN :</strong> {{ scan['latency_wan'] }} ms</p>
+    <p><strong>Version de l'application :</strong> {{ scan['application_version'] }}</p>
+
+    <h2>Machines détectées</h2>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>IP</th>
+                <th>Nom de la Machine</th>
+                <th>Ports ouverts</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for machine in machines %}
+                <tr>
+                    <td>{{ machine['ip_address'] }}</td>
+                    <td>{{ machine['hostname'] }}</td>
+                    <td>{{ machine_ports[machine['ip_address']] | join(', ') }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>

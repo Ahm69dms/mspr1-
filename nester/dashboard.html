@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tableau de Bord - Clients</title>
+</head>
+<body>
+    <h1>Liste des Clients</h1>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Nom du Client</th>
+                <th>Localisation</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for client in clients %}
+                <tr>
+                    <td>{{ client['name'] }}</td>
+                    <td>{{ client['location'] }}</td>
+                    <td><a href="/scan/{{ client['id'] }}">Voir les scans</a></td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>
